@@ -1,0 +1,6 @@
+﻿  FileDirectory.cpp
+c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(100): warning C4018: '<': signed/unsigned mismatch
+c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(175): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(182): warning C4554: '<<': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(153): warning C4101: 'firstClusterAddress': unreferenced local variable
+c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(141): error C4716: 'FileDirectory::write': must return a value
