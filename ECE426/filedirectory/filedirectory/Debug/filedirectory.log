@@ -1,6 +1,8 @@
 ﻿  FileDirectory.cpp
-c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(100): warning C4018: '<': signed/unsigned mismatch
-c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(175): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
-c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(182): warning C4554: '<<': check operator precedence for possible error; use parentheses to clarify precedence
-c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(153): warning C4101: 'firstClusterAddress': unreferenced local variable
-c:\users\bmjudd\desktop\filedirectory\filedirectory\filedirectory.cpp(141): error C4716: 'FileDirectory::write': must return a value
+c:\users\bobby\dropbox\school\school-projects\ece426\filedirectory\filedirectory\filedirectory.cpp(147): warning C4018: '<': signed/unsigned mismatch
+c:\users\bobby\dropbox\school\school-projects\ece426\filedirectory\filedirectory\filedirectory.cpp(254): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\bobby\dropbox\school\school-projects\ece426\filedirectory\filedirectory\filedirectory.cpp(261): warning C4554: '<<': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\bobby\dropbox\school\school-projects\ece426\filedirectory\filedirectory\filedirectory.cpp(232): warning C4101: 'firstClusterAddress': unreferenced local variable
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  filedirectory.vcxproj -> C:\Users\Bobby\Dropbox\School\school-projects\ECE426\filedirectory\Debug\filedirectory.exe
+  filedirectory.vcxproj -> C:\Users\Bobby\Dropbox\School\school-projects\ECE426\filedirectory\Debug\filedirectory.pdb (Partial PDB)

@@ -14,12 +14,33 @@ bool FileDirectory::create(char filename[], int numberBytes)
 	unsigned short int numClusters = numberBytes / 4;//4 bytes per cluster
 	//(1)	to check if there is an unused entry in the File Directory;  (i.e.the first character of the file name in the File Directory is zero).Return false if not true.
 
-	//TODO: FIRST CHECK FILE DIR. FOR FILENAME...
+	//Check if filename already exists in the directory
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			if (filename[j] == fileDirectory[i][j])
+			{
+				if (j == 7)
+				{
+					//Filename already exists
+					return false;
+				}
+			}
+			else
+			{
+				//Filename doesn't match, check next file
+				break;
+			}
+		}
+	}
 
-	for(int i = 0; i < 256; i++)
+	//Find the first unused cluster
+	for(i = 0; i < 256; i++)
 	{
 		if(FAT16[i] == 0x0000 || FAT16[i] == 0x0001)
 		{
+			//First sequential FAT address = to 0 or 1
 			firstClusterAddress = FAT16[i];
 			break;
 		}
@@ -36,6 +57,7 @@ bool FileDirectory::create(char filename[], int numberBytes)
 		{
 			FAT16[j] = j + 1;
 		}
+		//Last address equal to 0xFFF8 to denote end-of-file
 		FAT16[j] = 0xFFF8;
 		return true;
 	}
@@ -47,6 +69,12 @@ bool FileDirectory::dlete(char filename[])
 	/*(0)	to check if the file to be deleted; filename[]; is in the Directory.If not; return false.
 	(1)	to change the first character of the file name in the File Directory to be zero;
 	(2)	to change all entries of the clusters of this file in the FAT to 1; i.e.; unused.*/
+
+	//TODO: Search for file in directory
+
+	//TODO: Obtain first cluster address
+
+	//TODO: Clear all clusters for file
 	return false;
 }
 
@@ -57,7 +85,7 @@ bool FileDirectory::read(char filename[])
 	unsigned char fileData[1024];
 	/*purpose: to read  of data from data[] array from the file with the specified file name.
 	(0)	to check if the file to be deleted; filename[]; is in the Directory.If not; return false.*/
-	for (int i = 0; i < 4; i++)//Each cluster has 4 bytes
+	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
@@ -162,15 +190,47 @@ bool FileDirectory::write(char filename[], int numberBytes, char data[], int yea
 	fileDirectory[empty][31] = numberBytes >> 16;
 	fileDirectory[empty][31] = numberBytes >> 8;
 	fileDirectory[empty][31] = numberBytes;
+	return true;
 
 }
 
 void FileDirectory::printClusters(char filename[])
 {
+	unsigned short int firstClusterAddress;
+	//(1)	to check if the file to be printed; filename[]; is in the Directory.If not; return false.
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			if (filename[j] == fileDirectory[i][j])
+			{
+				if (j == 7)
+				{
+					//File exists
+					//Store first cluster address
+					firstClusterAddress = (fileDirectory[i][27] << 8) + fileDirectory[i][26];
 
+					//Print all cluster addresses in the file
+					for (int i = firstClusterAddress; i < 0xFFF8; i = FAT16[i+1])
+						cout << std::hex << i << endl;
+				}
+				continue;
+			}
+			else
+			{
+				//Filename doesn't match, check next file
+				if (i == 3)
+				{
+					//No match found
+					cout << "File not found." << endl;
+				}
+				break;
+			}
+		}
+	}
 }
 /*purpose: to print all the clusters of a file.
-(1)	to check if the file to be printed; filename[]; is in the Directory.If not; return false.
+
 (2)	use the file name to get the file information from the File Directory; including the first cluster address;
 (3)	use the first cluster address to get all cluster addresses from the FAT - 16;*/
 void FileDirectory::printDirectory()
